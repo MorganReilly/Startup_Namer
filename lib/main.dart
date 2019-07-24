@@ -12,17 +12,9 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final wordPair = WordPair.random();
     return MaterialApp(
-      title: 'Welcome to Flutter',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Startup Namer'),
-        ),
-        body: Center(
-          child: RandomWords(),
-        )
-      )
+      title: 'Startup Name Generator',
+      home: RandomWords(),
     );
   }
 }
@@ -41,10 +33,15 @@ class MyApp extends StatelessWidget {
 class RandomWordsState extends State<RandomWords> {
   final _suggestions = <WordPair>[];
   final _biggerFont = const TextStyle(fontSize: 18.0);
+
   @override
   Widget build(BuildContext context) {
-    final wordPair = WordPair.random();
-    return Text(wordPair.asPascalCase);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Startup Name Generator'),
+      ),
+      body: _buildSuggestions(),
+    );
   }
 
   Widget _buildSuggestions() {
@@ -71,7 +68,8 @@ class RandomWordsState extends State<RandomWords> {
   }
 }
 
-/*
+/* Notes about above class ^^
+
   > 1: The itemBuilder callback is called once per suggested word pairing,
     and places each suggestion into a ListTile row. For even rows,
     the function adds a ListTile row for the word pairing. For odd rows,
